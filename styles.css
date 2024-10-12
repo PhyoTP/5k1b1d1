@@ -50,7 +50,7 @@ main {
 	transform-origin: right; /* Rotate from the right edge */
 }
 
-#right a {
+#right button {
 	background-color: #000;
 }
 
