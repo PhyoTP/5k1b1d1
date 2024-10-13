@@ -1,28 +1,58 @@
 body {
 	background-image: url("Tile.png");
 }
+
 #center {
 	font-family: "Jacques Francois Shadow", serif;
-	text-align:center;
-	color:#fff;
-	background-image: url("paper.png");
-	background-size: contain;
-	background-repeat:no-repeat;
-	width: 30vw;
-	height: 45vh;
+	text-align: center;
+	color: #fff;
 	display: flex;
 	align-items: center;
+	justify-content: center;
+	position: relative;
 }
-h2{
-	width: 25vw;
+
+#paperContainer {
+	position: relative;
+	display: inline-block;
+	width: auto;
+	height: auto;
+	text-align: center;
+	z-index: 1;
 }
+
+#paperImage {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: -1; /* Make sure the image is behind the text */
+}
+
+#paper {
+	padding: 5rem;
+	margin: 0;
+	position: relative;
+	display: inline-block;
+	background: transparent;
+	color: #fff;
+	text-align:center;
+}
+
+/* Adjust h2 styles so that the container resizes based on the text */
+#paperContainer {
+	padding: 10px;
+}
+
+
 #left {
 	left: 0;
 }
 
 #right {
 	right: 0;
-}
+}	
 
 .column {
 	display: flex;
