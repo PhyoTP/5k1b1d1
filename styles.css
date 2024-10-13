@@ -1,7 +1,21 @@
 body {
 	background-image: url("Tile.png");
 }
-
+#center {
+	font-family: "Jacques Francois Shadow", serif;
+	text-align:center;
+	color:#fff;
+	background-image: url("paper.png");
+	background-size: contain;
+	background-repeat:no-repeat;
+	width: 30vw;
+	height: 45vh;
+	display: flex;
+	align-items: center;
+}
+h2{
+	width: 75%;
+}
 #left {
 	left: 0;
 }
@@ -57,4 +71,9 @@ main {
 /* Door hover effect: rotateY to simulate opening */
 #right img:hover {
 	transform: rotateY(75deg); /* Opens the door to the left */
+}
+#left button{
+	background: none;
+	border: none;
+	cursor: pointer;
 }
