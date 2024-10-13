@@ -30,7 +30,7 @@ const actions = [
     }, 
     () => {
         let skibidi = document.createElement('img');
-        skibidi.src = "https://static.wikia.nocookie.net/skibidi-toilet-official/images/b/b1/GiantST.png/revision/latest?cb=20240205231829";
+        skibidi.src = "https://m.media-amazon.com/images/M/MV5BNjAzOGMxYjUtM2QxMy00NTBiLWI5NjEtNjI3OTcwMjQ0OTQ2XkEyXkFqcGdeQXVyMTE3MTc5NDA5._V1_FMjpg_UX1000_.jpg";
         skibidi.style.width = '150px'; // Set the size of the image
         skibidi.style.height = '150px';
         skibidi.style.position = 'absolute'; // Position it absolutely
