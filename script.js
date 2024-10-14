@@ -58,25 +58,30 @@ function initChaser(png, id) {
     chaser.style.position = 'absolute';
     chaser.style.pointerEvents = 'none';
     chaser.style.zIndex = 2;
+	chaser.className = "chaser";
     document.body.appendChild(chaser);
 
     let targetX = window.innerWidth, targetY = window.innerHeight / 2;
     let currentX = window.innerWidth / 2, currentY = window.innerHeight / 2;
-    let isOnObstacle = false; // Flag to check if the mouse is on an obstacle
+    let isOnObstacle = false;
 
     document.addEventListener('mousemove', (event) => {
-        // Check if the mouse is on an obstacle
-        isOnObstacle = isMouseOnObstacle(event.clientX, event.clientY);
-        
-        // Update target position only if not on an obstacle
+        isOnObstacle = isMouseOn(event.clientX, event.clientY, "closet");
         if (!isOnObstacle) {
             targetX = event.clientX - chaser.width / 2;
             targetY = event.clientY - chaser.height / 2;
         }
+        
+        // Check if the chaser is close enough to the mouse
+        if (isMouseOn(event.clientX, event.clientY, "chaser")) {
+            // Get the door number from the previous code where you set it as a global variable
+            // Redirect with door number and chaser ID
+            window.location.href = `death/index.html?door=${doorWithFirstAction}&chaser=${id}`;
+        }
     });
 
-    function isMouseOnObstacle(mouseX, mouseY) {
-        let closets = document.getElementsByClassName("closet");
+    function isMouseOn(mouseX, mouseY, obstacle) {
+        let closets = document.getElementsByClassName(obstacle);
         for (let closet of closets) {
             let closetRect = closet.getBoundingClientRect();
             if (
@@ -85,14 +90,14 @@ function initChaser(png, id) {
                 mouseY > closetRect.top &&
                 mouseY < closetRect.bottom
             ) {
-                return true; // Mouse is on an obstacle
+                return true;
             }
         }
-        return false; // Mouse is not on any obstacle
+        return false;
     }
 
     function chaseCursor() {
-        if (!isOnObstacle) { // Only move chaser if the mouse is not on an obstacle
+        if (!isOnObstacle) {
             currentX += (targetX - currentX) * 0.01;
             currentY += (targetY - currentY) * 0.01;
         }
@@ -104,3 +109,4 @@ function initChaser(png, id) {
     chaseCursor();
     document.getElementById(id).play();
 }
+
