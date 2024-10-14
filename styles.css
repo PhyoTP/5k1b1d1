@@ -10,6 +10,7 @@ body {
 	align-items: center;
 	justify-content: center;
 	position: relative;
+	flex-direction: column;
 }
 
 #paperContainer {
@@ -106,4 +107,7 @@ main {
 	background: none;
 	border: none;
 	cursor: pointer;
+}
+.closet{
+	height: 150px;
 }

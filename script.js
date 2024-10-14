@@ -1,61 +1,7 @@
 const actions = [
     () => window.location.href = "https://manor.hackclub.com", 
-    () => {
-        let ksi = document.createElement('img');
-        ksi.src = "https://preview.redd.it/qeq7lgud5po51.jpg?auto=webp&s=a3a9534425966bc6293fc1982b026af46a1255f2";
-        ksi.style.width = '150px'; // Set the size of the image
-        ksi.style.height = '150px';
-        ksi.style.position = 'absolute'; // Position it absolutely
-        ksi.style.pointerEvents = 'none'; // Prevent blocking clicks
-        document.body.appendChild(ksi);
-
-        let targetX = 0, targetY = 0;
-        let currentX = window.innerWidth / 2, currentY = window.innerHeight / 2;
-
-        document.addEventListener('mousemove', (event) => {
-            targetX = event.clientX - ksi.width / 2;
-            targetY = event.clientY - ksi.height / 2;
-        });
-
-        function chaseCursor() {
-            currentX += (targetX - currentX) * 0.1;
-            currentY += (targetY - currentY) * 0.1;
-            ksi.style.left = `${currentX}px`;
-            ksi.style.top = `${currentY}px`;
-            requestAnimationFrame(chaseCursor);
-        }
-
-        chaseCursor();
-        document.getElementById("thickOfIt").play();
-    }, 
-    () => {
-        let skibidi = document.createElement('img');
-        skibidi.src = "https://m.media-amazon.com/images/M/MV5BNjAzOGMxYjUtM2QxMy00NTBiLWI5NjEtNjI3OTcwMjQ0OTQ2XkEyXkFqcGdeQXVyMTE3MTc5NDA5._V1_FMjpg_UX1000_.jpg";
-        skibidi.style.width = '150px'; // Set the size of the image
-        skibidi.style.height = '150px';
-        skibidi.style.position = 'absolute'; // Position it absolutely
-        skibidi.style.pointerEvents = 'none'; // Prevent blocking clicks
-        document.body.appendChild(skibidi);
-
-        let targetX = 0, targetY = 0;
-        let currentX = window.innerWidth / 2, currentY = window.innerHeight / 2;
-
-        document.addEventListener('mousemove', (event) => {
-            targetX = event.clientX - skibidi.width / 2;
-            targetY = event.clientY - skibidi.height / 2;
-        });
-
-        function chaseCursor() {
-            currentX += (targetX - currentX) * 0.1;
-            currentY += (targetY - currentY) * 0.1;
-            skibidi.style.left = `${currentX}px`;
-            skibidi.style.top = `${currentY}px`;
-            requestAnimationFrame(chaseCursor);
-        }
-
-        chaseCursor();
-        document.getElementById("skibidi").play();
-    }
+    () => initChaser("https://preview.redd.it/qeq7lgud5po51.jpg?auto=webp&s=a3a9534425966bc6293fc1982b026af46a1255f2","thickOfIt"), 
+    () => initChaser("https://m.media-amazon.com/images/M/MV5BNjAzOGMxYjUtM2QxMy00NTBiLWI5NjEtNjI3OTcwMjQ0OTQ2XkEyXkFqcGdeQXVyMTE3MTc5NDA5._V1_FMjpg_UX1000_.jpg","skibidi")
 ];
 
 // Function to get 3 random unique functions from the array, also returns their indices
@@ -103,4 +49,58 @@ const riddles = {
 let paper = document.getElementById("paper");
 function clue(num){
     paper.innerHTML = riddles[doorWithFirstAction][num];
+}
+function initChaser(png, id) {
+    let chaser = document.createElement('img');
+    chaser.src = png;
+    chaser.style.width = '150px';
+    chaser.style.height = '150px';
+    chaser.style.position = 'absolute';
+    chaser.style.pointerEvents = 'none';
+    chaser.style.zIndex = 2;
+    document.body.appendChild(chaser);
+
+    let targetX = window.innerWidth, targetY = window.innerHeight / 2;
+    let currentX = window.innerWidth / 2, currentY = window.innerHeight / 2;
+    let isOnObstacle = false; // Flag to check if the mouse is on an obstacle
+
+    document.addEventListener('mousemove', (event) => {
+        // Check if the mouse is on an obstacle
+        isOnObstacle = isMouseOnObstacle(event.clientX, event.clientY);
+        
+        // Update target position only if not on an obstacle
+        if (!isOnObstacle) {
+            targetX = event.clientX - chaser.width / 2;
+            targetY = event.clientY - chaser.height / 2;
+        }
+    });
+
+    function isMouseOnObstacle(mouseX, mouseY) {
+        let closets = document.getElementsByClassName("closet");
+        for (let closet of closets) {
+            let closetRect = closet.getBoundingClientRect();
+            if (
+                mouseX > closetRect.left &&
+                mouseX < closetRect.right &&
+                mouseY > closetRect.top &&
+                mouseY < closetRect.bottom
+            ) {
+                return true; // Mouse is on an obstacle
+            }
+        }
+        return false; // Mouse is not on any obstacle
+    }
+
+    function chaseCursor() {
+        if (!isOnObstacle) { // Only move chaser if the mouse is not on an obstacle
+            currentX += (targetX - currentX) * 0.01;
+            currentY += (targetY - currentY) * 0.01;
+        }
+        chaser.style.left = `${currentX}px`;
+        chaser.style.top = `${currentY}px`;
+        requestAnimationFrame(chaseCursor);
+    }
+
+    chaseCursor();
+    document.getElementById(id).play();
 }
