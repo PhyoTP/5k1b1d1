@@ -1,5 +1,5 @@
 const actions = [
-    () => window.location.href = "https://manor.hackclub.com", 
+    () => window.location.href = "https://hack.club/boba-manor", 
     () => initChaser("https://preview.redd.it/qeq7lgud5po51.jpg?auto=webp&s=a3a9534425966bc6293fc1982b026af46a1255f2","thickOfIt"), 
     () => initChaser("https://m.media-amazon.com/images/M/MV5BNjAzOGMxYjUtM2QxMy00NTBiLWI5NjEtNjI3OTcwMjQ0OTQ2XkEyXkFqcGdeQXVyMTE3MTc5NDA5._V1_FMjpg_UX1000_.jpg","skibidi")
 ];
