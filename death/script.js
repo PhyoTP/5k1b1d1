@@ -85,10 +85,10 @@ function chaserDeath(src, id) {
 							appear(tip);
 							tip.addEventListener("transitionend", () => {
 								if (!document.getElementById("back")){
-									const back = document.createElement("a");
+									const back = document.createElement("button");
 									back.id = "back";
 									back.innerText = "Try Again";
-									back.href = "/";
+									back.onclick = history.back();
 									appear(back);
 									
 								}

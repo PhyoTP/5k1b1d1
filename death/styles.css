@@ -12,13 +12,13 @@ body {
 	flex-direction: column;
 }
 
-h1, a {
+h1, button {
     position: relative;
 	bottom: 50px;
     color: #fff;
     animation: floating 1s infinite alternate ease-in-out; /* Simplified animation shorthand */
 }
-a {
+button {
 	text-decoration: none;
 	padding: 10px;
 	font-size: 50px;
