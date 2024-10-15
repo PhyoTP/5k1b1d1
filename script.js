@@ -98,8 +98,8 @@ function initChaser(png, id) {
 
     function chaseCursor() {
         if (!isOnObstacle) {
-            currentX += (targetX - currentX) * 0.01;
-            currentY += (targetY - currentY) * 0.01;
+            currentX += (targetX - currentX) * 0.05;
+            currentY += (targetY - currentY) * 0.05;
         }
         chaser.style.left = `${currentX}px`;
         chaser.style.top = `${currentY}px`;

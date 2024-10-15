@@ -88,7 +88,7 @@ function chaserDeath(src, id) {
 									const back = document.createElement("button");
 									back.id = "back";
 									back.innerText = "Try Again";
-									back.onclick = history.back();
+									back.onclick = () => history.back(); // Assign the function properly
 									appear(back);
 									
 								}
